@@ -27,6 +27,7 @@ struct cadastra leDados(){
     char xx,qp[10];
     char nome[30];
     char cientifico[30];
+    char reino[30];
     char area[50];
     int w,i,c;
     do{
@@ -40,6 +41,9 @@ struct cadastra leDados(){
         
         printf("Digite o nome cientifico:\n");
         scanf("%s",cad[quantp].cientifico);
+        
+        printf("Digite o Reino ou Grupo ou Familia:\n");
+        scanf("%s",cad[quantp].reino);
         
         printf("Digite a area de ocupação da especie:\n");
         scanf("%s",cad[quantp].area);
@@ -72,7 +76,7 @@ struct cadastra leDados(){
         printf("Quer Cadastrar outra especie  \n\n");
         xx=getch();
     }while(xx=='s');
-    system("cls");
+    system("cls||clear");
 }
 void buscar(){
     int i,opica;
@@ -85,7 +89,7 @@ void buscar(){
             printf("3- Sair do menu busca\n");
             printf("Digite o numero da opcao desejada \n");
             scanf("%d",&opica);
-            system("cls");
+            system("cls||clear");
             switch(opica){
                 case 1:
                     printf("Lista de especies cadastrados\n");
@@ -95,6 +99,7 @@ void buscar(){
                         printf("Nome comum:       %s\n",cad[i].nome);
                         printf("Codigo da especie:     %d\n",cad[i].codigop);
                         printf("Nome cientifico:       %s\n",cad[i].cientifico);
+                        printf("Reino ou Grupo ou Familia:\n",cad[i].reino);
                         printf("Area de ocupação:       %s\n",cad[i].area);
                         printf("Status da especie:       %s\n",cad[i].status);
                         printf("Quantidade de animais na especie: %d\n",cad[i].quantidade);
@@ -110,6 +115,7 @@ void buscar(){
                             printf("Nome comum:       %s\n",cad[i].nome);
                             printf("Codigo da especie:     %d\n",cad[i].codigop);
                             printf("Nome cientifico:       %s\n",cad[i].cientifico);
+                            printf("Reino ou Grupo ou Familia:\n",cad[i].reino);
                             printf("Area de ocupação:       %s\n",cad[i].area);
                             printf("Status da especie:       %s\n",cad[i].status);
                             printf("Quantidade de animais na especie: %d\n",cad[i].quantidade);
@@ -121,7 +127,7 @@ void buscar(){
                     break;
             }
         }while(opica!=3);
-        system("cls");
+        system("cls||clear");
 }
 void alterar (){
     int i;
@@ -142,6 +148,9 @@ void alterar (){
             printf("Digite o nome cientifico:\n");
             scanf("%s",cad[quantp].cientifico);
             
+            printf("Digite o Reino ou Grupo ou Familia:\n");
+            scanf("%s",cad[quantp].reino);
+            
             printf("Digite a area de ocupação da especie:\n");
             scanf("%s",cad[quantp].area);
             
@@ -154,7 +163,7 @@ void alterar (){
             fflush(stdin);
         }
     }
-    system("cls");
+    system("cls||clear");
 }
 void remover () {    			// Função remover
 	int i,j,cont=0;
@@ -178,7 +187,7 @@ void remover () {    			// Função remover
         printf ("\nPressione ENTER Para Continuar !");
         setbuf(stdin,NULL);
         getchar ();
-        system ("cls");
+        system("cls||clear");
     }else {
         printf("Esse numero de codigo nao existe\n");
     }
@@ -196,7 +205,7 @@ int main (){
         printf("5 - Finalizar\n");
         printf("Digite o numero da opcao desejada \n");
         scanf("%d",&opicao);
-        system("cls");
+        system("cls||clear");
         switch(opicao){
             case 1:
                 novaespecie=leDados();
