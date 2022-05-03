@@ -16,7 +16,9 @@ struct cadastra{
     char nome[30];
     char cientifico[30];
     char area[50];
+    char reino[50];
     char status[50];
+
 };
 
 struct cadastra cad[MAX];
@@ -83,23 +85,72 @@ struct cadastra leDados(){
     }while(xx=='s');
     system("cls||clear");
 }
+
+struct cadastra leDados2(){
+    char xx,qp[10];
+    char nome[30];
+    char area[50];
+    int w,i,c;
+    do{
+        xx='n';
+        fflush(stdin);
+        printf("Digite o nome comum (popular):\n");
+        scanf("%s",cad[quantp].nome);
+        
+        cad[quantp].codigop = 2 + rand()%100;
+        printf("Codigo da especie: %d\n",cad[quantp].codigop);
+        
+        printf("Digite a area de aparição:\n");
+        scanf("%s",cad[quantp].area);
+        
+        
+        do{
+            c=0;w=0;
+            fflush(stdin);
+            printf("Quantidade de individuos avistados\n");
+            scanf("%s",&qp);
+            for(i=0;i<strlen(qp);i++){
+                if( ! isdigit(qp[i])){
+                    c=1;
+                    break;
+                }
+            }
+            if(c==0)
+                cad[quantp].quantidade = atoi(qp);
+            else {
+                printf("Isso Nao e um Numero.\n");
+                w=1;
+            }
+        
+        
+        }while( w );
+        fflush(stdin);
+        quantp++;
+        printf("Quer Cadastrar outra especie  \n\n");
+        xx=getch();
+    }while(xx=='s');
+    system("cls||clear");
+}
+
+
 void buscar(){
     int i,opica;
     char nome[30];
     char cientifico[30];
         do{
             printf("MENU DE BUSCA\n");
-            printf("1- Mostrar lista de especies\n");
-            printf("2- Buscar pelo nome comum\n");;
-            printf("3- Sair do menu busca\n");
+            printf("1- Mostrar lista de especies cadastradas pelo Monitor\n");
+            printf("2- Mostrar lista de especies cadastradas pela Comunidade\n");
+            printf("3- Buscar pelo nome comum\n");;
+            printf("4- Sair do menu busca\n");
             printf("Digite o numero da opcao desejada \n");
             scanf("%d",&opica);
             system("cls||clear");
             switch(opica){
                 case 1:
-                    printf("Lista de especies cadastrados\n");
+                    printf("Lista de especies cadastrados pelos Monitores\n");
                     for(i=0;i<quantp;i++){
-                        printf("Produto %d \n",i+1);
+                        printf("Especie %d \n",i+1);
                         printf("+++++++++++++++++++++++\n");
                         printf("Nome comum:       %s\n",cad[i].nome);
                         printf("Codigo da especie:     %d\n",cad[i].codigop);
@@ -111,7 +162,19 @@ void buscar(){
                         printf("+++++++++++++++++++++++\n");
                     }
                     break;
+                    
                 case 2:
+                    printf("Lista de especies cadastrados pela comunidade\n");
+                    for(i=0;i<quantp;i++){
+                        printf("+++++++++++++++++++++++\n");
+                        printf("Nome comum:       %s\n",cad[i].nome);
+                        printf("Codigo da especie:     %d\n",cad[i].codigop);
+                        printf("Area de aparição:       %s\n",cad[i].area);
+                        printf("Quantidade de animais avistados: %d\n",cad[i].quantidade);
+                        printf("+++++++++++++++++++++++\n");
+                    }
+                    break;
+                case 3:
                     printf("Digite o Nome comum\n");
                     scanf("%s",&nome);
                     for(i=0;i<quantp;i++){
@@ -128,10 +191,10 @@ void buscar(){
                         }
                     }
                     break;
-                case 3:
+                case 4:
                     break;
             }
-        }while(opica!=3);
+        }while(opica!=4);
         system("cls||clear");
 }
 void alterar (){
@@ -203,11 +266,12 @@ int main (){
     struct cadastra novaespecie;
     do{
         printf("MENU DE OPCAO\n");
-        printf("1 - Cadastrar\n");
-        printf("2 - Buscar\n");
-        printf("3 - Alterar\n");
-        printf("4 - Remover\n");
-        printf("5 - Finalizar\n");
+        printf("1 - Cadastrar (Monitor)\n");
+        printf("2 - Cadastrar (Comunidade)\n");
+        printf("3 - Buscar\n");
+        printf("4 - Alterar\n");
+        printf("5 - Remover\n");
+        printf("6 - Finalizar\n");
         printf("Digite o numero da opcao desejada \n");
         scanf("%d",&opicao);
         system("cls||clear");
@@ -216,22 +280,25 @@ int main (){
                 novaespecie=leDados();
                 break;
             case 2:
-                buscar();
+                novaespecie=leDados2();
                 break;
             case 3:
-                alterar();
+                buscar();
                 break;
             case 4:
+                alterar();
+                break;
+            case 5:
             	remover();
             	break;
-            case 5:
+            case 6:
                 printf("Obrigado!\n");
                 break;
             default:
                 printf("Opcao invalida!\nTente novamente:\n");
                 break;
         }
-    }while(opicao!=5);
+    }while(opicao!=6);
     system("PAUSE");
 return 0;
 }
